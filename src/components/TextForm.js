@@ -16,15 +16,17 @@ export default function TextForm(props) {
     }
     const handleOnoClick=()=>{
       console.log("Clicked!!")
-      let old=text;
-      let ns=text.toUpperCase();
+    
+      let ns=text.toLowerCase();
       setText(ns);
+      props.showAlert("Converted to Lower Case","success");
       
     }
     const handleOnnClick=()=>{
       console.log("Clicked!!")
-      let ns=text.toUpperCase();
-      setText(ns);
+      
+      setText("");
+      props.showAlert("Cleared Text","success");
       
     }
     
@@ -33,14 +35,26 @@ export default function TextForm(props) {
     <>
     <div className="mb-3">
         
-
-    <h1>{props.heading}</h1>
-  <textarea className="form-control" value={text} onChange={handleOnChange} id="mybox" rows="8"></textarea>
+     <div className={`text-${props.mode==='light'?'dark':'light'}`}>
+     <h1>{props.heading}</h1>
+     </div>
+   
+  <textarea className="form-control" style={{backgroundColor:'#D3D3D3'}} value={text} onChange={handleOnChange} id="mybox" rows="8"></textarea>
  
   </div>
-  <button className="btn btn-primary mx-2" onClick={handleOnClick}>Convert to UpperCase</button>
-  <button className="btn btn-primary mx-2" onClick={handleOnoClick}>Show old</button>
-  <button className="btn btn-primary mx-2" onClick={handleOnnClick}>Show New</button>
+  <button disabled={text.length===0} className="btn btn-secondary " onClick={handleOnClick}>Convert to UpperCase</button>
+  <button disabled={text.length===0} className="btn btn-secondary mx-2" onClick={handleOnoClick}>Convert to Lower case</button>
+  <button disabled={text.length===0} className="btn btn-secondary mx-2" onClick={handleOnnClick}>Clear Text</button>
+
+  
+    <div className={`container  my-3 text-${props.mode==='light'?'dark':'light'}`}>
+      <h2> Preview Summary</h2>
+      <p>
+        {text.split(/\s+/).filter((a)=>{return a.length!==0}).length} Words
+      </p>
+
+    </div>
+  
   
 
 

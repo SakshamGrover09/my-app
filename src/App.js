@@ -5,14 +5,14 @@ import TextForm from './components/TextForm';
 import About from './components/About';
 import { useState } from 'react';
 import Alert from './components/Alert';
-// import {
-//   createBrowserRouter,
-//   RouterProvider,
-//   Route,
-//   Routes,
-//   Link,
-//   BrowserRouter,
-// } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Routes,
+  Link,
+  BrowserRouter,
+} from "react-router-dom";
 
 function App() {
 
@@ -29,6 +29,7 @@ function App() {
       
     }, 2000);
   }
+  
 
   const togglemode=()=>{
     if(mode==='dark')
@@ -37,15 +38,10 @@ function App() {
       document.body.style.backgroundColor='white';
       showAlert("Light Mode is turned On","success");
       document.title='TextUtils-Light Mode';
-    //   setInterval(() => {
-    //      document.title='SK';
-    //   }, 2000);
-    //   setInterval(() => {
-    //     document.title='VG';
-    //  }, 1600);
+  
     }else{
       setMode('dark');
-      document.body.style.backgroundColor='#00004d';
+      document.body.style.backgroundColor='#333333';
       showAlert("Dark Mode is turned On","success");
       document.title='TextUtils-Dark Mode';
     }
@@ -53,24 +49,25 @@ function App() {
   }
   return (
     <>
-   {/* <BrowserRouter> */}
+    <BrowserRouter> 
     <Navbar title="About" mode={mode} togglemode={togglemode}/>
     <Alert alert={alert}/>
     <div className="container my-3">
+    
 
-    {/* <Routes>
-            <Route exact  path="/about" element={<About />}>
+     <Routes>
+            <Route exact  path="/About" element={<About mode={mode}/>}>
             </Route>
-            <Route exact path="/" element={<TextForm heading="Enter text to analyze"  mode={mode} showAlert={showAlert} />}>
+            <Route exact path="/TextForm" element={<TextForm heading="Enter text to Analyze"  mode={mode} showAlert={showAlert} />}>
             </Route>
-          </Routes> */}
+          </Routes> 
 
-<TextForm heading="Enter text to analyze"  mode={mode} showAlert={showAlert} />
+
        
       
       
     </div>
-    {/* </BrowserRouter> */}
+    </BrowserRouter>
   
     </>
   );
